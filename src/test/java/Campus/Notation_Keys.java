@@ -102,7 +102,7 @@ public class Notation_Keys extends Hooks{
     }
 
     @Test(dependsOnMethods = {"createNotKeys","deleteNotKeys"},priority = 5)
-    public void getFieldsNegative(){
+    public void getNotKeysNegative(){
         given()
                 .spec(requestSpec)
                 .pathParam("nKId", response.jsonPath().getString("id"))
@@ -117,7 +117,7 @@ public class Notation_Keys extends Hooks{
     }
 
     @Test(dependsOnMethods = {"createNotKeys","deleteNotKeys"}, priority = 6)
-    public void deleteFieldsNegative(){
+    public void deleteNotKeysNegative(){
 
         given()
                 .spec(requestSpec)
