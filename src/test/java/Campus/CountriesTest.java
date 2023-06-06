@@ -41,7 +41,7 @@ public class CountriesTest extends Hooks {
     }
 
     @Test(priority = 2)
-    public void createWithSameCountriesName(){
+    public void createWithSameCountriesName() {
         //  /school-service/api/countries
         countries.setName(response.jsonPath().getString("name"));
         given()
@@ -55,5 +55,73 @@ public class CountriesTest extends Hooks {
                 .extract().response();
     }
 
+    @Test(priority = 3)
+    public void getCountries() {
+        given()
+                .spec(requestSpec)
+                .pathParam("countriesId", response.jsonPath().getString("id"))
+//                .body(countries)  no need!
+                .when()
+                .get("/school-service/api/countries/{countriesId}")  // HOW WE GET?? {countriesId}  and  ///school-service/api/countries
+                .then()
+                .statusCode(200)
+                .spec(responseSpec)
+                .extract().response();
+    }
 
+    @Test(priority = 4)
+    public void editCountries() {
+        countries.setName(randomCountriesName());
+        countries.setCode(randomCountriesCode());
+        countries.setId(response.jsonPath().getString("id"));
+        given()
+                .spec(requestSpec)
+                .body(countries)  //no need!
+                .when()
+                .put("/school-service/api/countries")  // HOW WE GET?? {countriesId}  and  ///school-service/api/countries
+                .then()
+                .statusCode(200)
+                .spec(responseSpec)
+                .extract().response();
+    }
+
+    @Test(priority = 5)
+    public void deleteCountries() {
+        given()
+                .spec(requestSpec)
+                .pathParam("countriesId", response.jsonPath().getString("id"))
+                //.body(countries)  //no need!
+                .when()
+                .delete("/school-service/api/countries/{countriesId}")  // HOW WE GET?? {countriesId}  and  ///school-service/api/countries
+                .then()
+                .statusCode(200)
+                .spec(responseSpec)
+                .extract().response();
+    }
+
+    @Test(priority = 6)
+    public void getCountriesNegativeTest() {
+        given()
+                .spec(requestSpec)
+                .pathParam("countriesId", response.jsonPath().getString("id"))
+                .when()
+                .get("/school-service/api/countries/{countriesId}")
+                .then()
+                .statusCode(400)
+                .spec(responseSpec)
+                .extract().response();
+    }
+
+    @Test(priority = 7)
+    public void deleteCountriesAfterDeleted() {
+        given()
+                .spec(requestSpec)
+                .pathParam("countriesId", response.jsonPath().getString("id"))
+                .when()
+                .delete("/school-service/api/countries/{countriesId}")
+                .then()
+                .statusCode(400)
+                .extract().response();
+
+    }
 }
