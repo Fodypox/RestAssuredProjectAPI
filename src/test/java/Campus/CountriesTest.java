@@ -6,8 +6,8 @@ import io.restassured.response.Response;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.testng.annotations.*;
 
-import static io.restassured.RestAssured.config;
-import static io.restassured.RestAssured.given;
+//import static io.restassured.RestAssured.config;
+import static io.restassured.RestAssured.*;
 
 public class CountriesTest extends Hooks {
 
