@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.*;
 
-public class FieldsTest extends Hooks{
+public class  FieldsTest extends Hooks{
     public String randomFieldsName(){
         return RandomStringUtils.randomAlphabetic(6);
     }
