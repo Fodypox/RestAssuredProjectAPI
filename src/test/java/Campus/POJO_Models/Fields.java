@@ -4,6 +4,17 @@ import java.util.Arrays;
 
 public class Fields {
 
+    //"id": "647eb19d7ee68a6ee672a1b7",
+    //    "schoolId": "646cbb07acf2ee0d37c6d984",
+    //    "name": "SomeField",
+    //    "translateName": [],
+    //    "code": "10",
+    //    "type": "STRING",
+    //    "listElements": null,
+    //    "systemField": false,
+    //    "systemFieldName": null,
+    //    "children": []
+
     private String id;
     private String name;
     private String code;

@@ -2,6 +2,15 @@ package Campus.POJO_Models;
 
 public class Locations {
 
+    //"id": "647eafea7ee68a6ee672a1b4",
+    //    "deleted": false,
+    //    "name": "Voronezh",
+    //    "shortName": "Vor",
+    //    "capacity": 60,
+    //    "active": true,
+    //    "school": "646cbb07acf2ee0d37c6d984",
+    //    "type": "LABORATORY"
+
     private String id;
     private String name;
     private String shortName;
