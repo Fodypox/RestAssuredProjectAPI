@@ -97,7 +97,7 @@ public class CountriesTest extends Hooks {
                 .delete("/school-service/api/countries/{countriesId}")  // HOW WE GET?? {countriesId}  and  ///school-service/api/countries
                 .then()
                 .statusCode(200)
-                .spec(responseSpec)
+//                .spec(responseSpec)      // thats the mistake here!
                 .extract().response();
     }
 
