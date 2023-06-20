@@ -70,7 +70,7 @@ public class fees_Test extends Hooks {
 
         public void createNegativeTest() {
 
-           fees = new Fees();
+           fees.setPriority(response.jsonPath().getInt("priority"));
 
            response=  given()
                     .spec(requestSpec)
