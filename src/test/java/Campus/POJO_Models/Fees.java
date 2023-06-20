@@ -7,9 +7,11 @@ public class Fees {
     private  String id;
     private String name;
     private String code;
-    private String integrationCode;
+//    private String integrationCode;
+    private String budgetAccountIntegrationCode;
     private int priority;
-    private ArrayList<TranslateName> translateName;
+//    private ArrayList<TranslateName> translateName;
+    private String[] translateName = {};
 
     private boolean active;
 
@@ -37,13 +39,13 @@ public class Fees {
         this.code = code;
     }
 
-    public String getIntegrationCode(String memi) {
-        return integrationCode;
-    }
+//    public String getIntegrationCode(String memi) {
+//        return integrationCode;
+//    }
 
-    public void setIntegrationCode(String integrationCode) {
-        this.integrationCode = integrationCode;
-    }
+//    public void setIntegrationCode(String integrationCode) {
+//        this.integrationCode = integrationCode;
+//    }
 
     public boolean isActive(boolean b) {
         return active;
@@ -73,23 +75,39 @@ public class Fees {
         return code;
     }
 
-    public String getIntegrationCode() {
-        return integrationCode;
-    }
+//    public String getIntegrationCode() {
+//        return integrationCode;
+//    }
 
     public int getPriority() {
         return priority;
     }
 
-    public ArrayList<TranslateName> getTranslateName() {
-        return translateName;
-    }
+//    public ArrayList<TranslateName> getTranslateName() {
+//        return translateName;
+//    }
 
-    public void setTranslateName(ArrayList<TranslateName> translateName) {
-        this.translateName = translateName;
-    }
+//    public void setTranslateName(ArrayList<TranslateName> translateName) {
+//        this.translateName = translateName;
+//    }
 
     public boolean isActive() {
         return active;
+    }
+
+    public String getBudgetAccountIntegrationCode() {
+        return budgetAccountIntegrationCode;
+    }
+
+    public void setBudgetAccountIntegrationCode(String budgetAccountIntegrationCode) {
+        this.budgetAccountIntegrationCode = budgetAccountIntegrationCode;
+    }
+
+    public String[] getTranslateName() {
+        return translateName;
+    }
+
+    public void setTranslateName(String[] translateName) {
+        this.translateName = translateName;
     }
 }

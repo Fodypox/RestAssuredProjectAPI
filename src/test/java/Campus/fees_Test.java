@@ -19,6 +19,14 @@ public class fees_Test extends Hooks {
         return RandomStringUtils.randomAlphabetic(5);
     }
 
+    public String randomIntegrationCode() {
+        return RandomStringUtils.randomAlphabetic(3);
+    }
+
+    public int randomPriority() {
+        return Integer.parseInt(RandomStringUtils.randomNumeric(3));
+    }
+
 
 
     Response response;
@@ -30,15 +38,21 @@ public class fees_Test extends Hooks {
         fees = new Fees();
 
 
-            fees.getId();
-            fees.getIntegrationCode("char");
-            fees.getName(randomFeesName());
-            fees.getCode(randomFeesCode());
-            fees.getPriority(120);
-            fees.isActive(true);
-            fees.getTranslateName();
+//            fees.getId();
+//            fees.getIntegrationCode("char");
+//            fees.getName(randomFeesName());
+//            fees.getCode(randomFeesCode());
+//            fees.getPriority(120);
+//            fees.isActive(true);
+//            fees.getTranslateName();
+        fees.setActive(true);
+        fees.setBudgetAccountIntegrationCode(randomIntegrationCode());
+        fees.setCode(randomFeesCode());
+        fees.setName(randomFeesName());
+        fees.setPriority(randomPriority());
 
             response = given()
+                    .contentType(ContentType.JSON)
                     .spec(requestSpec)
                     .body(fees)
 
@@ -46,12 +60,13 @@ public class fees_Test extends Hooks {
                     .post("/school-service/api/fee-types")
 
                     .then()
-                    .spec(responseSpec)
                     .statusCode(201)
+                    .log().body()
+                    .spec(responseSpec)
                     .extract().response();
         }
 
-        @Test(priority = 1)
+        @Test(priority = 1, dependsOnMethods = "createFee")
 
         public void createNegativeTest() {
 
@@ -75,7 +90,7 @@ public class fees_Test extends Hooks {
     public void editFeesTest(){
 
             fees.getId();
-            fees.setIntegrationCode("12");
+//            fees.setIntegrationCode("12");
             fees.setName(randomFeesName());
             fees.setCode(randomFeesCode());
             fees.setPriority(110);
@@ -97,7 +112,7 @@ public class fees_Test extends Hooks {
     @Test(priority = 3)
     public void deleteFees(){
         fees.getId("647ec8ab873f2e44790378a3");
-        fees.setIntegrationCode("memis");
+//        fees.setIntegrationCode("memis");
         fees.setName(randomFeesName());
         fees.setCode(randomFeesCode());
         fees.setPriority(110);

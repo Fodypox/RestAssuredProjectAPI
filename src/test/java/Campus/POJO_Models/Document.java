@@ -3,14 +3,14 @@ package Campus.POJO_Models;
 public class Document {
     private String id;
     private String name;
-    private String attachmentStage;
-    private String description=" ";
-    private boolean required=true;
-    private boolean active=true;
-    private boolean useCamera=false;
+    private String[] attachmentStages = {"CERTIFICATE"};
+    private String description = "";
+    private boolean required = true;
+    private boolean active = true;
+    private boolean useCamera = false;
 
-    private String[] translateName={};
-    private String schoolId="646cbb07acf2ee0d37c6d984";
+    private String[] translateName = {};
+    private String schoolId = "646cbb07acf2ee0d37c6d984";
 
     public String getId() {
         return id;
@@ -28,12 +28,12 @@ public class Document {
         this.name = name;
     }
 
-    public String getAttachmentStage() {
-        return attachmentStage;
+    public String[] getAttachmentStages() {
+        return attachmentStages;
     }
 
-    public void setAttachmentStage(String attachmentStage) {
-        this.attachmentStage = attachmentStage;
+    public void setAttachmentStages(String[] attachmentStages) {
+        this.attachmentStages = attachmentStages;
     }
 
     public String getDescription() {

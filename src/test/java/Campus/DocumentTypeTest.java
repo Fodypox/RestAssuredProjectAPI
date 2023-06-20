@@ -22,10 +22,11 @@ public class DocumentTypeTest extends Hooks {
     public String randomDocumentName() {
         return RandomStringUtils.randomAlphanumeric(2);
     }
-    public String stageList(){
-        Random random=new Random();
-        int randomStage=random.nextInt(6);
-        ArrayList<String> stageList=new ArrayList<>(Arrays.asList("Student Registration", "Examination","Employment","Certificate","Contract","Dismissal"));
+
+    public String stageList() {
+        Random random = new Random();
+        int randomStage = random.nextInt(6);
+        ArrayList<String> stageList = new ArrayList<>(Arrays.asList("Student Registration", "Examination", "Employment", "Certificate", "Contract", "Dismissal"));
         return stageList.get(randomStage);
     }
 
@@ -35,24 +36,25 @@ public class DocumentTypeTest extends Hooks {
         document = new Document();
         document.setName(randomDocumentName());
         document.setSchoolId("646cbb07acf2ee0d37c6d984");
-        document.setAttachmentStage(stageList());
+//        document.setAttachmentStages(stageList());
         response = given()
-               //.spec(requestSpec)
-                .body(document)
+//
                 .contentType(ContentType.JSON)
-                .cookies(cookies)
+                .spec(requestSpec)
+                .body(document)
+//                .cookies(cookies)
                 .when()
                 .post("/school-service/api/attachments/create")
                 .then()
                 //.spec(responseSpec)
-                .statusCode(200)
-               .log().body()
+                .statusCode(201)//it was 200
+                .spec(responseSpec)
+                .log().body()
                 .extract().response();
     }
 
 
-
-    @Test(dependsOnMethods ="createNewDocument",priority = 1)
+    @Test(dependsOnMethods = "createNewDocument", priority = 1)
     public void createDocumentNegative() {
         document.setName(response.jsonPath().getString("name"));
         given()
@@ -67,7 +69,7 @@ public class DocumentTypeTest extends Hooks {
                 .extract().response();
     }
 
-    @Test(dependsOnMethods ="createNewDocument",priority = 2)
+    @Test(dependsOnMethods = "createNewDocument", priority = 2)
     public void getDocument() {
         document.setName(response.jsonPath().getString("name"));
         given()
@@ -82,7 +84,7 @@ public class DocumentTypeTest extends Hooks {
                 .extract().response();
     }
 
-    @Test(dependsOnMethods ="createNewDocument",priority = 3)
+    @Test(dependsOnMethods = "createNewDocument", priority = 3)
     public void updateDocument() {
         document.setName(randomDocumentName());
         document.setSchoolId("646cbb07acf2ee0d37c6d984");
@@ -100,11 +102,11 @@ public class DocumentTypeTest extends Hooks {
 
     }
 
-    @Test(dependsOnMethods ="createNewDocument",priority = 4)
+    @Test(dependsOnMethods = "createNewDocument", priority = 4)
     public void deleteDocument() {
 
         given()
-                .pathParam("DocumentId",response.jsonPath().getString("id"))
+                .pathParam("DocumentId", response.jsonPath().getString("id"))
                 .cookies(cookies)
                 .when()
                 .delete("/school-service/api/attachments/{DocumentId}")
@@ -114,11 +116,12 @@ public class DocumentTypeTest extends Hooks {
                 .extract().response();
 
     }
-    @Test(dependsOnMethods ={"createNewDocument","deleteDocument"},priority = 5)
+
+    @Test(dependsOnMethods = {"createNewDocument", "deleteDocument"}, priority = 5)
     public void deleteDocumentNegative() {
 
         given()
-                .pathParam("DocumentId",response.jsonPath().getString("id"))
+                .pathParam("DocumentId", response.jsonPath().getString("id"))
                 .cookies(cookies)
                 .when()
                 .delete("/school-service/api/attachments/{DocumentId}")
@@ -128,9 +131,10 @@ public class DocumentTypeTest extends Hooks {
                 .extract().response();
 
     }
-    @Test(dependsOnMethods ={"createNewDocument","deleteDocument"},priority = 6)
+
+    @Test(dependsOnMethods = {"createNewDocument", "deleteDocument"}, priority = 6)
     public void getDocumentAfterDeleteDocument() {
-    document.setName(response.jsonPath().getString("name"));
+        document.setName(response.jsonPath().getString("name"));
         given()
                 .body(document)
                 .cookies(cookies)
